@@ -1,0 +1,35 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules", "Ioc.Modules\Ioc.Modules.csproj", "{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93F5B926-C763-48EF-9B11-1F50BE74A962}"
+	ProjectSection(SolutionItems) = preProject
+		NuGet\Ioc.Modules.Ninject.nuspec = NuGet\Ioc.Modules.Ninject.nuspec
+		NuGet\Ioc.Modules.nuspec = NuGet\Ioc.Modules.nuspec
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Ninject", "Ioc.Modules.Ninject\Ioc.Modules.Ninject.csproj", "{9F885D57-3AB9-472B-AC78-D907C953E5FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

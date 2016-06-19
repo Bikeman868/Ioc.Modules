@@ -1,0 +1,4 @@
+D:\Git\Martin\Ioc.Modules\Ioc.Modules\bin\Release\Ioc.Modules.dll
+D:\Git\Martin\Ioc.Modules\Ioc.Modules\bin\Release\Ioc.Modules.pdb
+D:\Git\Martin\Ioc.Modules\Ioc.Modules\obj\Release\Ioc.Modules.dll
+D:\Git\Martin\Ioc.Modules\Ioc.Modules\obj\Release\Ioc.Modules.pdb

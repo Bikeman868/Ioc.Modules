@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Ioc.Modules.Ninject</id>
+    <version>1.0.1</version>
+    <title>Ioc.Modules.Ninject</title>
+    <authors>Martin Halliday</authors>
+    <owners>Martin Halliday</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Configures IOC modules into a Ninject container</description>
+    <copyright>Copyright 2016</copyright>
+    <releaseNotes>First tested and stable release</releaseNotes>
+    <summary>
+    </summary>
+    <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
+    <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
+    <tags>IOC modular package library Ninject</tags>
+    <dependencies>
+      <dependency id="Ninject" version="3.2.2.0" />
+      <dependency id="Ioc.Modules" version="1.0.0.0" />
+    </dependencies>
+    <references>
+    </references>
+  </metadata>
+  <files>
+    <file src="..\Ioc.Modules.Ninject\bin\Release\Ioc.Modules.Ninject.dll" target="lib"/>
+    <file src="..\*.md" target=""/>
+  </files>
+</package>
