@@ -10,7 +10,7 @@
         /// same interface is injected as a dependency the same instance will
         /// be injected. In this case the application can also create one instance
         /// per execution context without breaking any assumptions, for example
-        /// if the concrete implementation is not thread safe and the code uses may
+        /// if the concrete implementation is not thread safe and the code uses many
         /// threads then the application can construct one instance per thread.
         /// </summary>
         SingleInstance,
