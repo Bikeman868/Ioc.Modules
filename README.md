@@ -11,12 +11,17 @@ without breaking applications that use these libraries.
 ## Package developers
 
 You need to add classes into your packages that define the IoC needs
-of your package. Here is a simple example:
+of your package. I recommend that you call your class `Package` and place it 
+in the root folder of your project. For this to work, the requirement
+is to decorate the class with the `[Package]` attribute and to implement the
+`IPackage` interface.
+
+Here is a simple example:
 ```
     [Package]
     public class Package: IPackage
     {
-        public string Name {get { return "Test Package"; }}
+        public string Name {get { return "My next great thing"; }}
 
         public IList<IocRegistration> IocRegistrations
         {
@@ -31,17 +36,29 @@ of your package. Here is a simple example:
         }
     }
 ```
-In this example the package is declaring that it needs the application to register
-the interface `ILog` to resolve to the concrete type `TraceLog` (or any other class
-that implements ILog) and that the package depends on the `IExceptionReporter` interface
-but does not contain an implementation of it and therefore the application must provide one.
+In this example the package is declaring that 
+* This package needs the application to register the interface `ILog` to resolve to the concrete type 
+`TraceLog` in its IoC container (the application can also choose to register `ILog` to any other class that 
+implements `ILog`).
+* the package depends on the `IExceptionReporter` interface but does not contain an implementation of it 
+and therefore the application must provide one. This can be provided by installing another package that
+registers a concrete implemntation, or the application developer can write one.
 
 ## Application developers
 
 When you use a package in your application that needs IoC setup and it
 has a dependency on this package, then all you need to do is initialize 
-one of the IoC container adapters and you're done.
+one of the IoC container adapters and you're done. For example if you want to use `Ninject` as
+your IoC container, then add the `Ioc.Modules.Ninject` NuGet package to your application and
+initialize it as described in its readme file.
 
-It might also make sense for your application to define its own Ioc needs by
-adding package classes to your application. If you do this then you can swap IoC
-containers with no impact on your code.
+This is what the `Ninject` example would look like if you want to probe all loaded assemblies for packages:
+
+```
+    var packageLocator = new PackageLocator().ProbeAllLoadedAssemblies();
+    var ninject = new StandardKernel(new Ioc.Modules.Ninject.Module(packageLocator));
+```
+
+This package is very convenient for package authors because they can configure IoC without knowing anything
+about the IoC container you are using in your application. You can also use the same mechanism to configure
+IoC within your application making it agnostic to the IoC container too.
