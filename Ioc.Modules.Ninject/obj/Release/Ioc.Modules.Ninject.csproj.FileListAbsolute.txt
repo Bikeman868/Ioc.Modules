@@ -1,9 +1,0 @@
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\bin\Release\Ioc.Modules.Ninject.dll
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\bin\Release\Ioc.Modules.Ninject.pdb
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\bin\Release\Ioc.Modules.dll
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\bin\Release\Ninject.dll
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\bin\Release\Ioc.Modules.pdb
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\bin\Release\Ninject.xml
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\obj\Release\Ioc.Modules.Ninject.csprojResolveAssemblyReference.cache
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\obj\Release\Ioc.Modules.Ninject.dll
-D:\Git\Martin\Ioc.Modules\Ioc.Modules.Ninject\obj\Release\Ioc.Modules.Ninject.pdb

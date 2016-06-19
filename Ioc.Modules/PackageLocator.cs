@@ -35,8 +35,9 @@ namespace Ioc.Modules
                 {
                     try
                     {
-                        var packageAttribute = type.CustomAttributes
-                            .FirstOrDefault(a => a.AttributeType == typeof (PackageAttribute));
+                        var packageAttribute = type
+                            .GetCustomAttributes(typeof (PackageAttribute), true)
+                            .FirstOrDefault();
                         if (packageAttribute != null)
                         {
                             if (packageInterface.IsAssignableFrom(type))

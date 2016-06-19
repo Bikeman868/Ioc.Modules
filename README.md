@@ -59,6 +59,13 @@ This is what the `Ninject` example would look like if you want to probe all load
     var ninject = new StandardKernel(new Ioc.Modules.Ninject.Module(packageLocator));
 ```
 
+And the Unity version is also very little code
+```
+    var unityContainer = new UnityContainer();
+    var packageLocator = new PackageLocator().ProbeAllLoadedAssemblies();
+	Ioc.Modules.Unity.Registrar.Register(packageLocator, unityContainer);
+```
+
 This package is very convenient for package authors because they can configure IoC without knowing anything
 about the IoC container you are using in your application. You can also use the same mechanism to configure
 IoC within your application making it agnostic to the IoC container too.

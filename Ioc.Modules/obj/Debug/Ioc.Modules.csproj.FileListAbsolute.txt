@@ -1,5 +1,0 @@
-D:\Git\Martin\Ioc.Modules\Ioc.Modules\bin\Debug\Ioc.Modules.dll
-D:\Git\Martin\Ioc.Modules\Ioc.Modules\bin\Debug\Ioc.Modules.pdb
-D:\Git\Martin\Ioc.Modules\Ioc.Modules\obj\Debug\Ioc.Modules.csprojResolveAssemblyReference.cache
-D:\Git\Martin\Ioc.Modules\Ioc.Modules\obj\Debug\Ioc.Modules.dll
-D:\Git\Martin\Ioc.Modules\Ioc.Modules\obj\Debug\Ioc.Modules.pdb
