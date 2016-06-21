@@ -203,9 +203,10 @@ namespace Ioc.Modules
                 }
             }
 
+            var issues = new List<string>();
+
             foreach (var registration in registrations.Values)
             {
-                var issues = new List<string>();
                 if (registration.ConcreteType == null)
                 {
                     issues.Add("There is no concrete implementation of \"" + registration.Interfacetype + "\".");
@@ -215,21 +216,22 @@ namespace Ioc.Modules
                         {
                             if (packageRegistration.Interfacetype == registration.Interfacetype)
                             {
-                                issues.Add("Package " + package.Name + " depends on " + registration.Interfacetype + " with " + registration.Lifetime + " lifetime.");
+                                issues.Add("Package " + package.Name + " depends on " + registration.Interfacetype.Name + " with " + registration.Lifetime + " lifetime.");
                             }
                         }
                     }
                 }
-                if (issues.Count > 0)
+            }
+
+            if (issues.Count > 0)
+            {
+                var exceptionMessage = "Some IoC dependencies have not been met.";
+                foreach (var issue in issues)
                 {
-                    var exceptionMessage = "Some IoC dependencies have not been met.";
-                    foreach (var issue in issues)
-                    {
-                        Trace.WriteLine(issue);
-                        exceptionMessage += "\n" + issue;
-                    }
-                    throw new Exception(exceptionMessage);
+                    Trace.WriteLine(issue);
+                    exceptionMessage += "\n" + issue;
                 }
+                throw new Exception(exceptionMessage);
             }
 
             return registrations.Values.ToList();
