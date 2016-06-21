@@ -168,7 +168,7 @@ namespace Ioc.Modules
         /// </summary>
         public PackageLocator ProbeBinFolderAssemblies()
         {
-            var binFolderPath = AppDomain.CurrentDomain.SetupInformation.ApplicationBase;
+            var binFolderPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
             var assemblyFileNames = Directory.GetFiles(binFolderPath, "*.dll");
 
             var assemblies = assemblyFileNames
