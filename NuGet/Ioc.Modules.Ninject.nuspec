@@ -11,13 +11,16 @@
     <copyright>Copyright 2016</copyright>
     <releaseNotes>Added support for .Net 4.0 and 4.5</releaseNotes>
     <summary>
+      Provides a Ninject module that will probe assemblies for IoC dependencies 
+      declared with Ioc.Modules package and registers those dependencies with 
+      Ninject.
     </summary>
     <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
     <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
     <tags>IOC modular package library Ninject</tags>
     <dependencies>
       <dependency id="Ninject" version="3.2.2.0" />
-      <dependency id="Ioc.Modules" version="1.0.1" />
+      <dependency id="Ioc.Modules" version="1.0.7" />
     </dependencies>
     <references>
     </references>

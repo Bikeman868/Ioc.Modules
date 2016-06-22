@@ -11,6 +11,8 @@
     <copyright>Copyright 2016</copyright>
     <releaseNotes>Added support for .Net 4.0 and 4.5</releaseNotes>
     <summary>
+      Probes assemblies for IoC dependencies declared with Ioc.Modules and
+      registers those dependencies with the Unity container.
     </summary>
     <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
     <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
@@ -18,7 +20,7 @@
     <dependencies>
       <dependency id="CommonServiceLocator" version="1.0" />
       <dependency id="Unity" version="2.1.505.2" />
-      <dependency id="Ioc.Modules" version="1.0.1" />
+      <dependency id="Ioc.Modules" version="1.0.7" />
     </dependencies>
     <references>
     </references>
