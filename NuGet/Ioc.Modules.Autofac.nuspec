@@ -2,12 +2,12 @@
 <package >
   <metadata>
     <id>Ioc.Modules.Autofac</id>
-    <version>1.0.7</version>
+    <version>1.0.8</version>
     <title>Ioc.Modules.Autofac</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Configures IOC modules using the Autofac builder</description>
+    <description>Configures packages using Ioc.Modules with the Autofac builder</description>
     <copyright>Copyright 2016</copyright>
     <releaseNotes>Added support for .Net 4.0 and 4.5</releaseNotes>
     <summary>
@@ -19,7 +19,7 @@
     <tags>IOC modular package library Autofac</tags>
     <dependencies>
       <dependency id="Autofac" version="3.5.2" />
-      <dependency id="Ioc.Modules" version="1.0.7" />
+      <dependency id="Ioc.Modules" version="1.0.8" />
     </dependencies>
     <references>
     </references>
