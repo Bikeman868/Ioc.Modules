@@ -66,6 +66,14 @@ And the Unity version is also very little code
 	Ioc.Modules.Unity.Registrar.Register(packageLocator, unityContainer);
 ```
 
+And the Autofac version looks like this
+```
+    var packages = new PackageLocator().ProbeBinFolderAssemblies();
+    var builder = new ContainerBuilder();
+    Ioc.Modules.Autofac.Registrar.Register(packages, builder);
+    var container = builder.Build();
+```
+
 This package is very convenient for package authors because they can configure IoC without knowing anything
 about the IoC container you are using in your application. You can also use the same mechanism to configure
 IoC within your application making it agnostic to the IoC container too.

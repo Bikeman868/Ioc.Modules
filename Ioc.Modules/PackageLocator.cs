@@ -168,7 +168,14 @@ namespace Ioc.Modules
         /// </summary>
         public PackageLocator ProbeBinFolderAssemblies()
         {
-            var binFolderPath = AppDomain.CurrentDomain.SetupInformation.PrivateBinPath;
+            // Getting the location of the bin folder for all application types
+            // is rediculously hard in .Net.
+            // http://stackoverflow.com/questions/52797/how-do-i-get-the-path-of-the-assembly-the-code-is-in
+            var codeBase = Assembly.GetExecutingAssembly().CodeBase;
+            var assemblyUri = new UriBuilder(codeBase);
+            var assemblyPath = Uri.UnescapeDataString(assemblyUri.Path);
+            var binFolderPath = Path.GetDirectoryName(assemblyPath);
+
             var assemblyFileNames = Directory.GetFiles(binFolderPath, "*.dll");
 
             var assemblies = assemblyFileNames

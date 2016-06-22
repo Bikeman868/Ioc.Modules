@@ -16,7 +16,7 @@ namespace Ioc.Modules
         /// <typeparam name="TClass">The type that implements this interface</typeparam>
         /// <param name="lifetime">The lifetime management expected for this intarfece</param>
         /// <returns>this for fluid configuration</returns>
-        public IocRegistration Init<TInterface, TClass>(IocLifetime lifetime) 
+        public IocRegistration Init<TInterface, TClass>(IocLifetime lifetime = IocLifetime.SingleInstance) 
             where TInterface: class
             where TClass: class, TInterface
         {
@@ -36,7 +36,7 @@ namespace Ioc.Modules
         /// <typeparam name="TInterface">The interface to register</typeparam>
         /// <param name="lifetime">The lifetime management expected for this intarfece</param>
         /// <returns>this for fluid configuration</returns>
-        public IocRegistration Init<TInterface>(IocLifetime lifetime)
+        public IocRegistration Init<TInterface>(IocLifetime lifetime = IocLifetime.SingleInstance)
             where TInterface : class
         {
             Interfacetype = typeof(TInterface);
