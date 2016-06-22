@@ -1,24 +1,36 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules", "Ioc.Modules\Ioc.Modules.csproj", "{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93F5B926-C763-48EF-9B11-1F50BE74A962}"
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		NuGet\Ioc.Modules.Autofac.nuspec = NuGet\Ioc.Modules.Autofac.nuspec
 		NuGet\Ioc.Modules.Ninject.nuspec = NuGet\Ioc.Modules.Ninject.nuspec
 		NuGet\Ioc.Modules.nuspec = NuGet\Ioc.Modules.nuspec
 		NuGet\Ioc.Modules.Unity.nuspec = NuGet\Ioc.Modules.Unity.nuspec
 		NuGet\Package.cmd = NuGet\Package.cmd
 		README.md = README.md
+		SharedVersion.cs = SharedVersion.cs
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Ninject", "Ioc.Modules.Ninject\Ioc.Modules.Ninject.csproj", "{9F885D57-3AB9-472B-AC78-D907C953E5FE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net40", "Ioc.Modules\Ioc.Modules.Net40.csproj", "{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Unity", "Ioc.Modules.Unity\Ioc.Modules.Unity.csproj", "{1B59CD46-CA3C-4EE0-8565-149B297C96D0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net45", "Ioc.Modules\Ioc.Modules.Net45.csproj", "{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net40.Ninject", "Ioc.Modules.Ninject\Ioc.Modules.Net40.Ninject.csproj", "{9F885D57-3AB9-472B-AC78-D907C953E5FE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net45.Ninject", "Ioc.Modules.Ninject\Ioc.Modules.Net45.Ninject.csproj", "{F81C7C3B-FCA4-4FDB-B05C-6343BB0F6177}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net40.Unity", "Ioc.Modules.Unity\Ioc.Modules.Net40.Unity.csproj", "{1B59CD46-CA3C-4EE0-8565-149B297C96D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net45.Unity", "Ioc.Modules.Unity\Ioc.Modules.Net45.Unity.csproj", "{A24BE310-56AA-4324-8F09-448151B7C913}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net40.Autofac", "Ioc.Modules.Autofac\Ioc.Modules.Net40.Autofac.csproj", "{151FD5CB-672B-4D11-B989-22C96BED9C13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net45.Autofac", "Ioc.Modules.Autofac\Ioc.Modules.Net45.Autofac.csproj", "{F70FEB5A-B6BD-450E-9DA7-9CAC4D5C31D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,14 +42,34 @@ Global
 		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F81C7C3B-FCA4-4FDB-B05C-6343BB0F6177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F81C7C3B-FCA4-4FDB-B05C-6343BB0F6177}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F81C7C3B-FCA4-4FDB-B05C-6343BB0F6177}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F81C7C3B-FCA4-4FDB-B05C-6343BB0F6177}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B59CD46-CA3C-4EE0-8565-149B297C96D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B59CD46-CA3C-4EE0-8565-149B297C96D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B59CD46-CA3C-4EE0-8565-149B297C96D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B59CD46-CA3C-4EE0-8565-149B297C96D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A24BE310-56AA-4324-8F09-448151B7C913}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A24BE310-56AA-4324-8F09-448151B7C913}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A24BE310-56AA-4324-8F09-448151B7C913}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A24BE310-56AA-4324-8F09-448151B7C913}.Release|Any CPU.Build.0 = Release|Any CPU
+		{151FD5CB-672B-4D11-B989-22C96BED9C13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{151FD5CB-672B-4D11-B989-22C96BED9C13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{151FD5CB-672B-4D11-B989-22C96BED9C13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{151FD5CB-672B-4D11-B989-22C96BED9C13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F70FEB5A-B6BD-450E-9DA7-9CAC4D5C31D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F70FEB5A-B6BD-450E-9DA7-9CAC4D5C31D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F70FEB5A-B6BD-450E-9DA7-9CAC4D5C31D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F70FEB5A-B6BD-450E-9DA7-9CAC4D5C31D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

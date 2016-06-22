@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Ioc.Modules</id>
-    <version>1.0.6</version>
+    <version>1.0.7</version>
     <title>Ioc.Modules</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A modular way of configuring IOC dependencies that is independent of the container</description>
     <copyright>Copyright 2016</copyright>
-    <releaseNotes>First tested and stable release</releaseNotes>
+    <releaseNotes>Added support for .Net 4.0 and 4.5</releaseNotes>
     <summary>
       Provides a mechanism for library authors to inform the hosting application
       about its IoC requirements. Applications can also use this internally to
@@ -24,7 +24,8 @@
     </references>
   </metadata>
   <files>
-    <file src="..\Ioc.Modules\bin\Release\Ioc.Modules.dll" target="lib"/>
+    <file src="..\Ioc.Modules\bin\Net40\Release\Ioc.Modules.dll" target="lib\net40"/>
+    <file src="..\Ioc.Modules\bin\Net45\Release\Ioc.Modules.dll" target="lib\net45"/>
     <file src="..\*.md" target=""/>
   </files>
 </package>
