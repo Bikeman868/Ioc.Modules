@@ -149,7 +149,16 @@ namespace Ioc.Modules
             foreach (var assembly in assemblies)
             {
                 if (!_probedAssemblies.ContainsKey(assembly.FullName))
-                    Add(assembly);
+                {
+                    try
+                    {
+                        Add(assembly);
+                    }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine("Exception probiing assembly " + ex.Message);
+                    }
+                }
             }
             return this;
         }
