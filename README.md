@@ -12,9 +12,8 @@ without breaking applications that use these libraries.
 
 You need to add classes into your packages that define the IoC needs
 of your package. I recommend that you call your class `Package` and place it 
-in the root folder of your project. For this to work, the requirement
-is to decorate the class with the `[Package]` attribute and to implement the
-`IPackage` interface.
+in the root folder of your project. For this to work you must decorate the class 
+with the `[Package]` attribute and to implement the `IPackage` interface.
 
 Here is a simple example:
 ```
@@ -43,6 +42,11 @@ implements `ILog`).
 * the package depends on the `IExceptionReporter` interface but does not contain an implementation of it 
 and therefore the application must provide one. This can be provided by installing another package that
 registers a concrete implemntation, or the application developer can write one.
+
+Note that adding this class to your package does not force applications to use it. They can choose to
+use `Ioc.Modules` to configure their IoC container or they can configure IoC in some other way, or 
+choose not to use IoC at all. By adding this class to your package you are providing a very simple and
+convenient way for the application developer to configure IoC only if they choose to use it.
 
 ## Application developers
 
@@ -74,6 +78,11 @@ And the Autofac version looks like this
     var container = builder.Build();
 ```
 
-This package is very convenient for package authors because they can configure IoC without knowing anything
-about the IoC container you are using in your application. You can also use the same mechanism to configure
-IoC within your application making it agnostic to the IoC container too.
+This `Ioc.Modules` package is very convenient for package authors because they can configure 
+IoC for thier package without knowing anything about the IoC container you are using in your 
+application. You can also use the same mechanism to configure IoC within your application 
+making it agnostic to the IoC container too.
+
+Note that if you are using a package that has dependencies and you are providing a concrete implementation of
+that depencency in your application, then your application must contain a `Package` file defining these implementations
+so that `Ioc.Modules` knows that the dependencies have been satisfied.
