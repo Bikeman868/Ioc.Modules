@@ -29,7 +29,8 @@ Here is a simple example:
                 return new List<IocRegistration>
                 {
                     new IocRegistration().Init<ILog, TraceLog>(IocLifetime.SingleInstance),
-                    new IocRegistration().Init<IExceptionReporter>(IocLifetime.SingleInstance)
+                    new IocRegistration().Init<IExceptionReporter>(IocLifetime.SingleInstance),
+                    new IocRegistration().Init<IApplication>(() => new Application("My App"))
                 };
             }
         }

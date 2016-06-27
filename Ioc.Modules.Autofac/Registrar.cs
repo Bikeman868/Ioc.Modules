@@ -8,14 +8,29 @@ namespace Ioc.Modules.Autofac
         {
             foreach(var registration in packageLocator.GetAllRegistrations())
             {
-                var autofacRegistration = builder
-                    .RegisterType(registration.ConcreteType)
-                    .As(registration.Interfacetype);
+                if (registration.ConcreteType == null)
+                {
+                    if (registration.Instance != null)
+                    {
+                        var reg = registration;
+                        builder
+                            .Register(i => reg.Instance)
+                            .As(registration.InterfaceType)
+                            .SingleInstance();
+                    }
+                }
+                else
+                {
+                    var autofacRegistration = builder
+                        .RegisterType(registration.ConcreteType)
+                        .As(registration.InterfaceType);
 
-                if (registration.Lifetime == IocLifetime.SingleInstance)
-                    autofacRegistration.SingleInstance();
-                else if (registration.Lifetime == IocLifetime.MultiInstance)
-                    autofacRegistration.InstancePerDependency();
+                    if (registration.Lifetime == IocLifetime.SingleInstance)
+                        autofacRegistration.SingleInstance();
+
+                    else if (registration.Lifetime == IocLifetime.MultiInstance)
+                        autofacRegistration.InstancePerDependency();
+                }
             }
         }
     }

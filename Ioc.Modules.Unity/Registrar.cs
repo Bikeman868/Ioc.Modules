@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.Practices.Unity;
+﻿using Microsoft.Practices.Unity;
 
 namespace Ioc.Modules.Unity
 {
@@ -10,20 +8,30 @@ namespace Ioc.Modules.Unity
         {
             foreach(var registration in packageLocator.GetAllRegistrations())
             {
-                switch (registration.Lifetime)
+                if (registration.ConcreteType == null)
                 {
-                    case IocLifetime.SingleInstance:
-                        unity.RegisterType(
-                            registration.Interfacetype,
-                            registration.ConcreteType,
-                            new ContainerControlledLifetimeManager());
-                        break;
-                    case IocLifetime.MultiInstance:
-                        unity.RegisterType(
-                            registration.Interfacetype,
-                            registration.ConcreteType,
-                            new ExternallyControlledLifetimeManager());
-                        break;
+                    if (registration.Instance != null)
+                    {
+                        unity.RegisterInstance(registration.InterfaceType, registration.Instance);
+                    }
+                }
+                else
+                {
+                    switch (registration.Lifetime)
+                    {
+                        case IocLifetime.SingleInstance:
+                            unity.RegisterType(
+                                registration.InterfaceType,
+                                registration.ConcreteType,
+                                new ContainerControlledLifetimeManager());
+                            break;
+                        case IocLifetime.MultiInstance:
+                            unity.RegisterType(
+                                registration.InterfaceType,
+                                registration.ConcreteType,
+                                new ExternallyControlledLifetimeManager());
+                            break;
+                    }
                 }
             }
         }

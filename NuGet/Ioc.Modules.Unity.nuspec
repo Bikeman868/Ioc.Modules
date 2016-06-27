@@ -2,14 +2,14 @@
 <package >
   <metadata>
     <id>Ioc.Modules.Unity</id>
-    <version>1.0.9</version>
+    <version>1.1.0</version>
     <title>Ioc.Modules.Unity</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Configures packages using Ioc.Modules into a Unity container</description>
     <copyright>Copyright 2016</copyright>
-    <releaseNotes>Added support for .Net 4.0 and 4.5</releaseNotes>
+    <releaseNotes>Added support registering instances</releaseNotes>
     <summary>
       Probes assemblies for IoC dependencies declared with Ioc.Modules and
       registers those dependencies with the Unity container.
@@ -20,7 +20,7 @@
     <dependencies>
       <dependency id="CommonServiceLocator" version="1.0" />
       <dependency id="Unity" version="2.1.505.2" />
-      <dependency id="Ioc.Modules" version="1.0.9" />
+      <dependency id="Ioc.Modules" version="1.1.0" />
     </dependencies>
     <references>
     </references>

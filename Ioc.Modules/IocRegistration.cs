@@ -8,7 +8,7 @@ namespace Ioc.Modules
     public class IocRegistration
     {
         /// <summary>
-        /// Constructs an IocRegistration where this package defines both the
+        /// Initializes this IocRegistration where this package defines both the
         /// interface and also contains the concrete implementation of
         /// that inetrface
         /// </summary>
@@ -20,7 +20,7 @@ namespace Ioc.Modules
             where TInterface: class
             where TClass: class, TInterface
         {
-            Interfacetype = typeof (TInterface);
+            InterfaceType = typeof (TInterface);
             ConcreteType = typeof (TClass);
             Lifetime = lifetime;
 
@@ -28,7 +28,7 @@ namespace Ioc.Modules
         }
 
         /// <summary>
-        /// Constructs an IoC registration where this package needs an interface
+        /// Initializes this an IoC registration where this package needs an interface
         /// to be implemented by the application or another package. In this case
         /// this package defines the interface but does not contain a concrete
         /// implementation of it.
@@ -39,8 +39,27 @@ namespace Ioc.Modules
         public IocRegistration Init<TInterface>(IocLifetime lifetime = IocLifetime.SingleInstance)
             where TInterface : class
         {
-            Interfacetype = typeof(TInterface);
+            InterfaceType = typeof(TInterface);
             Lifetime = lifetime;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Initializes this IoC registration where this package contains the concrete
+        /// implementation of a singleton, but the singleton has some special initialization
+        /// required that can not be carried out by the IoC container. In this case a function
+        /// is supplied to do the construction and initialization
+        /// </summary>
+        /// <typeparam name="TInterface">The interface to register</typeparam>
+        /// <param name="instanceFunction">A function that will return an instance that implements the interface</param>
+        /// <returns>this for fluid configuration</returns>
+        public IocRegistration Init<TInterface>(Func<TInterface> instanceFunction)
+            where TInterface : class
+        {
+            InterfaceType = typeof(TInterface);
+            Lifetime = IocLifetime.SingleInstance;
+            InstanceFunction = instanceFunction;
 
             return this;
         }
@@ -48,7 +67,7 @@ namespace Ioc.Modules
         /// <summary>
         /// The type of the interface to register with IoC
         /// </summary>
-        public Type Interfacetype { get; set; }
+        public Type InterfaceType { get; set; }
 
         /// <summary>
         /// The concrete implementation of this interface, or null if the application must
@@ -60,5 +79,15 @@ namespace Ioc.Modules
         /// The lifetime management that the package assumes for this interface
         /// </summary>
         public IocLifetime Lifetime { get; set; }
+
+        /// <summary>
+        /// A function that will construct and inisialize an object of Interfacetype
+        /// </summary>
+        public Func<object> InstanceFunction { get; set; }
+
+        /// <summary>
+        /// A function that will construct and inisialize an object of Interfacetype
+        /// </summary>
+        public object Instance { get; set; }
     }
 }

@@ -209,12 +209,12 @@ namespace Ioc.Modules
                 {
                     if (registration.ConcreteType == null)
                     {
-                        if (!registrations.ContainsKey(registration.Interfacetype))
-                            registrations.Add(registration.Interfacetype, registration);
+                        if (!registrations.ContainsKey(registration.InterfaceType))
+                            registrations.Add(registration.InterfaceType, registration);
                     }
                     else
                     {
-                        registrations[registration.Interfacetype] = registration;
+                        registrations[registration.InterfaceType] = registration;
                     }
                 }
             }
@@ -225,15 +225,29 @@ namespace Ioc.Modules
             {
                 if (registration.ConcreteType == null)
                 {
-                    issues.Add("There is no concrete implementation of \"" + registration.Interfacetype + "\".");
-                    foreach (var package in _packages)
+                    if (registration.InstanceFunction == null)
                     {
-                        foreach (var packageRegistration in package.IocRegistrations)
+                        issues.Add("There is no concrete implementation of \"" + registration.InterfaceType + "\" and no registered function to construct an instance.");
+                        foreach (var package in _packages)
                         {
-                            if (packageRegistration.Interfacetype == registration.Interfacetype)
+                            foreach (var packageRegistration in package.IocRegistrations)
                             {
-                                issues.Add("Package " + package.Name + " depends on " + registration.Interfacetype.Name + " with " + registration.Lifetime + " lifetime.");
+                                if (packageRegistration.InterfaceType == registration.InterfaceType)
+                                {
+                                    issues.Add("Package " + package.Name + " depends on " + registration.InterfaceType.Name + " with " + registration.Lifetime + " lifetime.");
+                                }
                             }
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            registration.Instance = registration.InstanceFunction();
+                        }
+                        catch (Exception ex)
+                        {
+                            issues.Add("Exception thrown by instance function for " + registration.InterfaceType + ". " + ex.Message);
                         }
                     }
                 }

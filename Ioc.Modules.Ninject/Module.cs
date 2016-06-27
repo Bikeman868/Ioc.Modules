@@ -16,14 +16,31 @@ namespace Ioc.Modules.Ninject
             var regitrations = _packageLocator.GetAllRegistrations();
             foreach (var registration in regitrations)
             {
-                switch (registration.Lifetime)
+                var bind = Bind(registration.InterfaceType);
+                if (registration.ConcreteType == null)
                 {
-                    case IocLifetime.SingleInstance:
-                        Bind(registration.Interfacetype).To(registration.ConcreteType).InSingletonScope();
-                        break;
-                    case IocLifetime.MultiInstance:
-                        Bind(registration.Interfacetype).To(registration.ConcreteType).InTransientScope();
-                        break;
+                    if (registration.Instance != null)
+                    {
+                        bind
+                            .ToConstant(registration.Instance)
+                            .InSingletonScope();
+                    }
+                }
+                else
+                {
+                    switch (registration.Lifetime)
+                    {
+                        case IocLifetime.SingleInstance:
+                            bind
+                                .To(registration.ConcreteType)
+                                .InSingletonScope();
+                            break;
+                        case IocLifetime.MultiInstance:
+                            bind
+                                .To(registration.ConcreteType)
+                                .InTransientScope();
+                            break;
+                    }
                 }
             }
         }
