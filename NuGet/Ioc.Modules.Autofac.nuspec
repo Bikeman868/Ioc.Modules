@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Ioc.Modules.Autofac</id>
-    <version>1.1.0</version>
+    <version>1.1.2</version>
     <title>Ioc.Modules.Autofac</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
@@ -19,7 +19,7 @@
     <tags>IOC modular package library Autofac</tags>
     <dependencies>
       <dependency id="Autofac" version="3.5.2" />
-      <dependency id="Ioc.Modules" version="1.1.0" />
+      <dependency id="Ioc.Modules" version="1.1.2" />
     </dependencies>
     <references>
     </references>
