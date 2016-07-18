@@ -194,13 +194,18 @@ namespace Ioc.Modules
             return Add(assemblies);
         }
 
+        public interface IErrorReporter
+        {
+            void ReportIoCConfigurationError(string message);
+        }
+
         /// <summary>
         /// Gets a list of all IoC registrations that need to be made for all packages
         /// to have their dependencies satisfied. An exception will be thrown if any
         /// interfaces do not have concrete implementations. A list of these issues
         /// will also be output to System.Diagnostics.Trace.
         /// </summary>
-        public IList<IocRegistration> GetAllRegistrations()
+        public IList<IocRegistration> GetAllRegistrations(IErrorReporter errorReporter = null)
         {
             var registrations = new Dictionary<Type, IocRegistration>();
             foreach (var package in _packages)
@@ -220,6 +225,11 @@ namespace Ioc.Modules
             }
 
             var issues = new List<string>();
+            Action<string> reportError;
+            if (errorReporter == null)
+                reportError = issues.Add;
+            else
+                reportError = errorReporter.ReportIoCConfigurationError;
 
             foreach (var registration in registrations.Values)
             {
@@ -227,14 +237,14 @@ namespace Ioc.Modules
                 {
                     if (registration.InstanceFunction == null)
                     {
-                        issues.Add("There is no concrete implementation of \"" + registration.InterfaceType + "\" and no registered function to construct an instance.");
+                        reportError("There is no concrete implementation of \"" + registration.InterfaceType + "\" and no registered function to construct an instance.");
                         foreach (var package in _packages)
                         {
                             foreach (var packageRegistration in package.IocRegistrations)
                             {
                                 if (packageRegistration.InterfaceType == registration.InterfaceType)
                                 {
-                                    issues.Add("Package " + package.Name + " depends on " + registration.InterfaceType.Name + " with " + registration.Lifetime + " lifetime.");
+                                    reportError("Package " + package.Name + " depends on " + registration.InterfaceType.Name + " with " + registration.Lifetime + " lifetime.");
                                 }
                             }
                         }
@@ -247,7 +257,7 @@ namespace Ioc.Modules
                         }
                         catch (Exception ex)
                         {
-                            issues.Add("Exception thrown by instance function for " + registration.InterfaceType + ". " + ex.Message);
+                            reportError("Exception thrown by instance function for " + registration.InterfaceType + ". " + ex.Message);
                         }
                     }
                 }
