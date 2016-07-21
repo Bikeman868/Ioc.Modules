@@ -2,14 +2,17 @@
 <package >
   <metadata>
     <id>Ioc.Modules</id>
-    <version>1.1.2</version>
+    <version>1.1.3</version>
     <title>Ioc.Modules</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A modular way of configuring IOC dependencies that is independent of the container</description>
     <copyright>Copyright 2016</copyright>
-    <releaseNotes>You can pass an IErrorReporter to PackageLocator instead of it throwing an exception</releaseNotes>
+    <releaseNotes>
+      Logging of IoC dependency resolution process. 
+      Filtering and sorting package load order.
+    </releaseNotes>
     <summary>
       Provides a mechanism for library authors to inform the hosting application
       about its IoC requirements. Applications can also use this internally to

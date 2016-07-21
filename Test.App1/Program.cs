@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using Autofac;
 using Ioc.Modules;
 using Test.Interfaces;
@@ -26,6 +27,9 @@ namespace Test.App1
                 // The package will call back into the application
                 var class2 = scope.Resolve<Interface2>();
                 class2.Method2();
+
+                // Wait for key press to exit
+                Console.ReadLine();
             }
         }
     }

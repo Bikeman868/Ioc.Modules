@@ -199,26 +199,68 @@ namespace Ioc.Modules
             void ReportIoCConfigurationError(string message);
         }
 
+        public interface ILogger
+        {
+            void WriteLine(string message);
+        }
+
         /// <summary>
         /// Gets a list of all IoC registrations that need to be made for all packages
         /// to have their dependencies satisfied. An exception will be thrown if any
         /// interfaces do not have concrete implementations. A list of these issues
         /// will also be output to System.Diagnostics.Trace.
         /// </summary>
-        public IList<IocRegistration> GetAllRegistrations(IErrorReporter errorReporter = null)
+        public IList<IocRegistration> GetAllRegistrations()
         {
+            return GetAllRegistrations(null);
+        }
+
+        public IList<IocRegistration> GetAllRegistrations(IErrorReporter errorReporter)
+        {
+            return GetAllRegistrations(packages => packages, null, errorReporter);
+        }
+
+
+        /// <summary>
+        /// Gets a list of all IoC registrations that need to be made for all packages
+        /// to have their dependencies satisfied. An exception will be thrown if any
+        /// interfaces do not have concrete implementations. A list of these issues
+        /// will also be output to System.Diagnostics.Trace.
+        /// </summary>
+        public IList<IocRegistration> GetAllRegistrations(
+            Func<List<IPackage>, IEnumerable<IPackage>> sort, 
+            ILogger logger, 
+            IErrorReporter errorReporter)
+        {
+            Action<string> log;
+            if (logger == null) log = msg => { }; 
+            else log = logger.WriteLine;
+
             var registrations = new Dictionary<Type, IocRegistration>();
-            foreach (var package in _packages)
+            foreach (var package in sort(_packages))
             {
+                log("================================================================================");
+                log("Adding IoC registrations for package " + package.Name);
                 foreach (var registration in package.IocRegistrations)
                 {
-                    if (registration.ConcreteType == null)
+                    if (registration.ConcreteType == null && registration.InstanceFunction == null)
                     {
-                        if (!registrations.ContainsKey(registration.InterfaceType))
+                        if (registrations.ContainsKey(registration.InterfaceType))
+                        {
+                            log("Skipping IoC dependency on " + registration.InterfaceType.FullName + " because its already in the list");
+                        }
+                        else
+                        {
+                            log("Adding IoC dependency on " + registration.InterfaceType.FullName + " as " + registration.Lifetime);
                             registrations.Add(registration.InterfaceType, registration);
+                        }
                     }
                     else
                     {
+                        if (registration.ConcreteType == null)
+                            log("Registering singleton instance of " + registration.InterfaceType.FullName);
+                        else
+                            log("Registering concrete implementation of " + registration.InterfaceType.FullName + " with " + registration.Lifetime + " lifetime as " + registration.ConcreteType.FullName);
                         registrations[registration.InterfaceType] = registration;
                     }
                 }
@@ -226,18 +268,23 @@ namespace Ioc.Modules
 
             var issues = new List<string>();
             Action<string> reportError;
-            if (errorReporter == null)
-                reportError = issues.Add;
-            else
-                reportError = errorReporter.ReportIoCConfigurationError;
+            if (errorReporter == null) reportError = issues.Add;
+            else reportError = errorReporter.ReportIoCConfigurationError;
+
+            log("================================================================================");
+            log("Resolving IoC dependencies");
 
             foreach (var registration in registrations.Values)
             {
                 if (registration.ConcreteType == null)
                 {
+                    string message;
                     if (registration.InstanceFunction == null)
                     {
-                        reportError("There is no concrete implementation of \"" + registration.InterfaceType + "\" and no registered function to construct an instance.");
+                        message = "There is no concrete implementation of \"" + registration.InterfaceType + "\" and no registered function to construct an instance.";
+                        log(message);
+                        reportError(message);
+
                         foreach (var package in _packages)
                         {
                             foreach (var packageRegistration in package.IocRegistrations)
@@ -257,7 +304,9 @@ namespace Ioc.Modules
                         }
                         catch (Exception ex)
                         {
-                            reportError("Exception thrown by instance function for " + registration.InterfaceType + ". " + ex.Message);
+                            message = "Exception thrown by instance function for " + registration.InterfaceType + ". " + ex.Message;
+                            log(message);
+                            reportError(message);
                         }
                     }
                 }
