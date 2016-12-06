@@ -21,6 +21,9 @@ namespace Test.App2
 
             var class2 = ninject.Get<Interface2>();
             class2.Method2();
+
+            // Wait for key press to exit
+            Console.ReadLine();
         }
     }
 }
