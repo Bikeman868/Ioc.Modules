@@ -11,12 +11,11 @@ namespace Test.App2
         static void Main(string[] args)
         {
             // Probe assemblies to find all packages
-            var packages = new PackageLocator()
+            var packageLocator = new PackageLocator()
                 .ProbeBinFolderAssemblies()
                 .Add(Assembly.GetExecutingAssembly());
 
             // Register IoC dependencies with Ninject and build the container
-            var packageLocator = new PackageLocator().ProbeAllLoadedAssemblies();
             var ninject = new StandardKernel(new Ioc.Modules.Ninject.Module(packageLocator));
 
             var class2 = ninject.Get<Interface2>();

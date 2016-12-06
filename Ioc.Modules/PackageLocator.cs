@@ -17,6 +17,9 @@ namespace Ioc.Modules
         private List<IPackage> _packages;
         private SortedList<string, Assembly> _probedAssemblies;
         private SortedList<string, Type> _addedPackages;
+        private List<string> _probingErrors;
+
+        private const string TracePrefix = "Package locator: ";
 
         public PackageLocator()
         {
@@ -31,6 +34,7 @@ namespace Ioc.Modules
             _packages = new List<IPackage>();
             _probedAssemblies = new SortedList<string, Assembly>();
             _addedPackages = new SortedList<string, Type>();
+            _probingErrors = new List<string>();
         }
 
         /// <summary>
@@ -78,28 +82,31 @@ namespace Ioc.Modules
                                 }
                                 else
                                 {
-                                    Trace.WriteLine(
-                                        "Type " + type.FullName +
-                                        " in assembly " + assembly.FullName +
-                                        " implements IPackage but does not have a default public constructor.");
+                                    var msg = "Type " + type.FullName +
+                                              " in assembly " + assembly.FullName +
+                                              " implements IPackage but does not have a default public constructor.";
+                                    Trace.WriteLine(TracePrefix + msg);
+                                    _probingErrors.Add(msg);
                                 }
                             }
                         }
                         else
                         {
-                            Trace.WriteLine(
-                                "Type " + type.FullName + 
-                                " in assembly " + assembly.FullName + 
-                                " has the [Package] attribute but does not implement the IPackage interface.");
+                            var msg = "Type " + type.FullName +
+                                      " in assembly " + assembly.FullName +
+                                      " has the [Package] attribute but does not implement the IPackage interface.";
+                            Trace.WriteLine(TracePrefix + msg);
+                            _probingErrors.Add(msg);
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    Trace.WriteLine(
-                        "Exception whilst examining type " + type.FullName 
-                        + " in assembly " + assembly.FullName 
-                        + ". " + ex.Message);
+                    var msg = "Exception whilst examining type " + type.FullName
+                              + " in assembly " + assembly.FullName
+                              + ". " + ex.Message;
+                    Trace.WriteLine(TracePrefix + msg);
+                    _probingErrors.Add(msg);
                 }
             }
             return this;
@@ -154,9 +161,26 @@ namespace Ioc.Modules
                     {
                         Add(assembly);
                     }
+                    catch(ReflectionTypeLoadException ex)
+                    {
+                        var msg = "Exception probiing assembly " + assembly.FullName + ". " + ex.Message;
+                        Trace.WriteLine(TracePrefix + msg);
+                        _probingErrors.Add(msg);
+                        if (ex.LoaderExceptions != null)
+                        {
+                            foreach (var loaderException in ex.LoaderExceptions)
+                            {
+                                var loaderMsg = "  Loader exception " + loaderException.Message;
+                                Trace.WriteLine(loaderMsg);
+                                _probingErrors.Add(loaderMsg);
+                            }
+                        }
+                    }
                     catch (Exception ex)
                     {
-                        Trace.WriteLine("Exception probiing assembly " + ex.Message);
+                        var msg = "Exception probiing assembly " + assembly.FullName + ". " + ex.Message;
+                        Trace.WriteLine(TracePrefix + msg);
+                        _probingErrors.Add(msg);
                     }
                 }
             }
@@ -189,7 +213,43 @@ namespace Ioc.Modules
 
             var assemblies = assemblyFileNames
                 .Select(fileName => new AssemblyName(Path.GetFileNameWithoutExtension(fileName)))
-                .Select(name => AppDomain.CurrentDomain.Load(name));
+                .Select(name => 
+                    {
+                        try
+                        {
+                            Trace.WriteLine(TracePrefix + "Probing bin folder assembly " + name);
+                            return AppDomain.CurrentDomain.Load(name);
+                        }
+                        catch (FileNotFoundException ex)
+                        {
+                            var msg = "File not found exception loading " + name + ". " + ex.FileName;
+                            Trace.WriteLine(TracePrefix + msg);
+                            _probingErrors.Add(msg);
+                            return null;
+                        }
+                        catch (BadImageFormatException ex)
+                        {
+                            var msg = "Bad image format exception loading " + name + ". The DLL is probably not a .Net assembly. " + ex.FusionLog;
+                            Trace.WriteLine(TracePrefix + msg);
+                            _probingErrors.Add(msg);
+                            return null;
+                        }
+                        catch (FileLoadException ex)
+                        {
+                            var msg = "File load exception loading " + name + ". " + ex.FusionLog;
+                            Trace.WriteLine(TracePrefix + msg);
+                            _probingErrors.Add(msg);
+                            return null;
+                        }
+                        catch (Exception ex)
+                        {
+                            var msg = "Failed to load assembly " + name + ". " + ex.Message;
+                            Trace.WriteLine(TracePrefix + msg);
+                            _probingErrors.Add(msg);
+                            return null;
+                        }
+                    })
+                .Where(a => a != null);
 
             return Add(assemblies);
         }
@@ -317,7 +377,7 @@ namespace Ioc.Modules
                 var exceptionMessage = "Some IoC dependencies have not been met.";
                 foreach (var issue in issues)
                 {
-                    Trace.WriteLine(issue);
+                    Trace.WriteLine(TracePrefix + issue);
                     exceptionMessage += "\n" + issue;
                 }
                 throw new Exception(exceptionMessage);
