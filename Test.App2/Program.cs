@@ -12,8 +12,7 @@ namespace Test.App2
         {
             // Probe assemblies to find all packages
             var packageLocator = new PackageLocator()
-                .ProbeBinFolderAssemblies()
-                .Add(Assembly.GetExecutingAssembly());
+                .ProbeBinFolderAssemblies();
 
             // Register IoC dependencies with Ninject and build the container
             var ninject = new StandardKernel(new Ioc.Modules.Ninject.Module(packageLocator));

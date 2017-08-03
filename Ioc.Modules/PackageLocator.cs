@@ -19,7 +19,7 @@ namespace Ioc.Modules
         private SortedList<string, Type> _addedPackages;
         private List<string> _probingErrors;
 
-        private const string TracePrefix = "Package locator: ";
+        private const string _tracePrefix = "Package locator: ";
 
         public PackageLocator()
         {
@@ -85,7 +85,7 @@ namespace Ioc.Modules
                                     var msg = "Type " + type.FullName +
                                               " in assembly " + assembly.FullName +
                                               " implements IPackage but does not have a default public constructor.";
-                                    Trace.WriteLine(TracePrefix + msg);
+                                    Trace.WriteLine(_tracePrefix + msg);
                                     _probingErrors.Add(msg);
                                 }
                             }
@@ -95,7 +95,7 @@ namespace Ioc.Modules
                             var msg = "Type " + type.FullName +
                                       " in assembly " + assembly.FullName +
                                       " has the [Package] attribute but does not implement the IPackage interface.";
-                            Trace.WriteLine(TracePrefix + msg);
+                            Trace.WriteLine(_tracePrefix + msg);
                             _probingErrors.Add(msg);
                         }
                     }
@@ -105,7 +105,7 @@ namespace Ioc.Modules
                     var msg = "Exception whilst examining type " + type.FullName
                               + " in assembly " + assembly.FullName
                               + ". " + ex.Message;
-                    Trace.WriteLine(TracePrefix + msg);
+                    Trace.WriteLine(_tracePrefix + msg);
                     _probingErrors.Add(msg);
                 }
             }
@@ -164,7 +164,7 @@ namespace Ioc.Modules
                     catch(ReflectionTypeLoadException ex)
                     {
                         var msg = "Exception probiing assembly " + assembly.FullName + ". " + ex.Message;
-                        Trace.WriteLine(TracePrefix + msg);
+                        Trace.WriteLine(_tracePrefix + msg);
                         _probingErrors.Add(msg);
                         if (ex.LoaderExceptions != null)
                         {
@@ -179,7 +179,7 @@ namespace Ioc.Modules
                     catch (Exception ex)
                     {
                         var msg = "Exception probiing assembly " + assembly.FullName + ". " + ex.Message;
-                        Trace.WriteLine(TracePrefix + msg);
+                        Trace.WriteLine(_tracePrefix + msg);
                         _probingErrors.Add(msg);
                     }
                 }
@@ -217,41 +217,50 @@ namespace Ioc.Modules
                     {
                         try
                         {
-                            Trace.WriteLine(TracePrefix + "Probing bin folder assembly " + name);
+                            Trace.WriteLine(_tracePrefix + "Probing bin folder assembly " + name);
                             return AppDomain.CurrentDomain.Load(name);
                         }
                         catch (FileNotFoundException ex)
                         {
                             var msg = "File not found exception loading " + name + ". " + ex.FileName;
-                            Trace.WriteLine(TracePrefix + msg);
+                            Trace.WriteLine(_tracePrefix + msg);
                             _probingErrors.Add(msg);
                             return null;
                         }
                         catch (BadImageFormatException ex)
                         {
                             var msg = "Bad image format exception loading " + name + ". The DLL is probably not a .Net assembly. " + ex.FusionLog;
-                            Trace.WriteLine(TracePrefix + msg);
+                            Trace.WriteLine(_tracePrefix + msg);
                             _probingErrors.Add(msg);
                             return null;
                         }
                         catch (FileLoadException ex)
                         {
                             var msg = "File load exception loading " + name + ". " + ex.FusionLog;
-                            Trace.WriteLine(TracePrefix + msg);
+                            Trace.WriteLine(_tracePrefix + msg);
                             _probingErrors.Add(msg);
                             return null;
                         }
                         catch (Exception ex)
                         {
                             var msg = "Failed to load assembly " + name + ". " + ex.Message;
-                            Trace.WriteLine(TracePrefix + msg);
+                            Trace.WriteLine(_tracePrefix + msg);
                             _probingErrors.Add(msg);
                             return null;
                         }
                     })
                 .Where(a => a != null);
 
-            return Add(assemblies);
+            Add(assemblies);
+
+            // The application entry point assembly should take priority over any
+            // libraries referenced by the application.
+
+            if (AppDomain.CurrentDomain.DomainManager != null &&
+                AppDomain.CurrentDomain.DomainManager.EntryAssembly != null)
+                Add(AppDomain.CurrentDomain.DomainManager.EntryAssembly);
+
+            return this;
         }
 
         public interface IErrorReporter
@@ -377,7 +386,7 @@ namespace Ioc.Modules
                 var exceptionMessage = "Some IoC dependencies have not been met.";
                 foreach (var issue in issues)
                 {
-                    Trace.WriteLine(TracePrefix + issue);
+                    Trace.WriteLine(_tracePrefix + issue);
                     exceptionMessage += "\n" + issue;
                 }
                 throw new Exception(exceptionMessage);

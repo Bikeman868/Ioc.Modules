@@ -12,8 +12,7 @@ namespace Test.App1
         {
             // Probe assemblies to find all packages
             var packages = new PackageLocator()
-                .ProbeBinFolderAssemblies()
-                .Add(Assembly.GetExecutingAssembly());
+                .ProbeBinFolderAssemblies();
 
             // Register IoC dependencies with Autofac and build the container
             var builder = new ContainerBuilder();
