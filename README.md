@@ -97,3 +97,53 @@ making it agnostic to the IoC container too.
 Note that if you are using a package that has dependencies and you are providing a concrete implementation of
 those depencencies in your application, then your application must contain a `Package` file defining these implementations
 so that `Ioc.Modules` knows that the dependencies have been satisfied.
+
+# Advanced configuration options
+
+## Passing a property bag to package constructors
+
+This technique allows you to vary the way that packages register IoC needs based
+on a set of properties configured by the application.
+
+Below is an example of a package that looks for a property called `environment` and
+configures a different implementation of the `ILog` interface when the environment
+property is set to `"development"`.
+
+```
+    [Package]
+    public class Package: IPackage
+    {
+        public string Name { get { return "My next great thing"; } }
+
+		private readonly IList<IocRegistration> _iocRegistrations;
+        public IList<IocRegistration> IocRegistrations { get { return _iocRegistrations; } }
+
+		public Package(IPropertyBag properties)
+		{
+			_iocRegistrations = new List<IocRegistration>
+                {
+                    new IocRegistration().Init<IExceptionReporter>(IocLifetime.SingleInstance),
+                    new IocRegistration().Init<IApplication>(() => new Application(Name))
+                };
+
+			if (string.Equals(properties["environment"], "development", StringComparison.OrdinalIgnoreCase))
+				_iocRegistrations.Add(new IocRegistration().Init<ILog, TraceLog>(IocLifetime.SingleInstance))
+			else
+				_iocRegistrations.Add(new IocRegistration().Init<ILog, FileLog>(IocLifetime.SingleInstance))
+		}
+    }
+```
+
+For this example to work, the application must provide property values when loading packages. Below is
+is the Ninject example from above modified to set the environment property.
+
+```
+    var properties = new PropertyBag();
+	properties["environment"] = "development";
+
+    var packageLocator = new PackageLocator().ProbeAllLoadedAssemblies(properties);
+    var ninject = new StandardKernel(new Ioc.Modules.Ninject.Module(packageLocator));
+```
+
+If the application does not provide properties, then the package constructor will be passed a
+property bag instance that has no properties set.

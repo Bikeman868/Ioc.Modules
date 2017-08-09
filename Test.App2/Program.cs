@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Reflection;
 using Ioc.Modules;
+using Ioc.Modules.Ninject;
 using Ninject;
 using Test.Interfaces;
 
@@ -14,9 +14,10 @@ namespace Test.App2
             var packageLocator = new PackageLocator()
                 .ProbeBinFolderAssemblies();
 
-            // Register IoC dependencies with Ninject and build the container
-            var ninject = new StandardKernel(new Ioc.Modules.Ninject.Module(packageLocator));
+            // Register IoC dependencies with Ninject and build the Ninject container
+            var ninject = new StandardKernel(new Module(packageLocator));
 
+            // Now we can construct instances and their dependencies will be satisfied
             var class2 = ninject.Get<Interface2>();
             class2.Method2();
 

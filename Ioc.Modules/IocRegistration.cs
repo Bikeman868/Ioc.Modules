@@ -14,7 +14,7 @@ namespace Ioc.Modules
         /// </summary>
         /// <typeparam name="TInterface">The interface to register</typeparam>
         /// <typeparam name="TClass">The type that implements this interface</typeparam>
-        /// <param name="lifetime">The lifetime management expected for this intarfece</param>
+        /// <param name="lifetime">The lifetime management expected for this interface</param>
         /// <returns>this for fluid configuration</returns>
         public IocRegistration Init<TInterface, TClass>(IocLifetime lifetime = IocLifetime.SingleInstance) 
             where TInterface: class

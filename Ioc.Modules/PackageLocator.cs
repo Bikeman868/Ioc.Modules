@@ -54,8 +54,11 @@ namespace Ioc.Modules
         /// before then its packages are moved to the end of the list so that
         /// their IoC registrations will take priority.
         /// </summary>
-        public PackageLocator Add(Assembly assembly)
+        public PackageLocator Add(Assembly assembly, IPropertyBag properties = null)
         {
+            if (properties == null)
+                properties = new PropertyBag();
+
             if (!_probedAssemblies.ContainsKey(assembly.FullName))
                 _probedAssemblies.Add(assembly.FullName, assembly);
 
@@ -74,19 +77,31 @@ namespace Ioc.Modules
                             if (!_addedPackages.ContainsKey(type.FullName))
                             {
                                 _addedPackages.Add(type.FullName, type);
-                                var defaultPublicConstructor = type.GetConstructor(Type.EmptyTypes);
-                                if (defaultPublicConstructor != null)
+
+                                var propertyBagConstructor = type.GetConstructor(new[] { typeof(IPropertyBag) });
+                                if (propertyBagConstructor != null)
                                 {
-                                    var package = (IPackage)defaultPublicConstructor.Invoke(null);
+                                    var package = (IPackage)propertyBagConstructor.Invoke(new[] { properties });
                                     Add(package);
                                 }
                                 else
                                 {
-                                    var msg = "Type " + type.FullName +
-                                              " in assembly " + assembly.FullName +
-                                              " implements IPackage but does not have a default public constructor.";
-                                    Trace.WriteLine(_tracePrefix + msg);
-                                    _probingErrors.Add(msg);
+                                    var defaultPublicConstructor = type.GetConstructor(Type.EmptyTypes);
+                                    if (defaultPublicConstructor != null)
+                                    {
+                                        var package = (IPackage)defaultPublicConstructor.Invoke(null);
+                                        Add(package);
+                                    }
+                                    else
+                                    {
+                                        var msg = "Type " + type.FullName +
+                                                  " in assembly " + assembly.FullName +
+                                                  " implements IPackage but does not have a usable constructor." +
+                                                  " The constructor must be public, and it should either take no" +
+                                                  " parameters, or take signature can be ";
+                                        Trace.WriteLine(_tracePrefix + msg);
+                                        _probingErrors.Add(msg);
+                                    }
                                 }
                             }
                         }
@@ -118,10 +133,10 @@ namespace Ioc.Modules
         /// to the end of the list so that their IoC registrations will take 
         /// priority.
         /// </summary>
-        public PackageLocator Add(FileInfo assemblyFile)
+        public PackageLocator Add(FileInfo assemblyFile, IPropertyBag properties = null)
         {
             var assembly = Assembly.LoadFrom(assemblyFile.FullName);
-            return Add(assembly);
+            return Add(assembly, properties);
         }
 
         /// <summary>
@@ -130,10 +145,10 @@ namespace Ioc.Modules
         /// to the end of the list so that their IoC registrations will take 
         /// priority.
         /// </summary>
-        public PackageLocator Add(AssemblyName assemblyName)
+        public PackageLocator Add(AssemblyName assemblyName, IPropertyBag properties = null)
         {
             var assembly = AppDomain.CurrentDomain.Load(assemblyName);
-            return Add(assembly);
+            return Add(assembly, properties);
         }
 
         /// <summary>
@@ -142,24 +157,27 @@ namespace Ioc.Modules
         /// to the end of the list so that their IoC registrations will take 
         /// priority.
         /// </summary>
-        public PackageLocator Add(string assemblyName)
+        public PackageLocator Add(string assemblyName, IPropertyBag properties = null)
         {
             var assembly = AppDomain.CurrentDomain.Load(assemblyName);
-            return Add(assembly);
+            return Add(assembly, properties);
         }
 
         /// <summary>
         /// Adds only assemblies that have not been added already.
         /// </summary>
-        public PackageLocator Add(IEnumerable<Assembly> assemblies)
+        public PackageLocator Add(IEnumerable<Assembly> assemblies, IPropertyBag properties = null)
         {
+            if (properties == null)
+                properties = new PropertyBag();
+
             foreach (var assembly in assemblies)
             {
                 if (!_probedAssemblies.ContainsKey(assembly.FullName))
                 {
                     try
                     {
-                        Add(assembly);
+                        Add(assembly, properties);
                     }
                     catch(ReflectionTypeLoadException ex)
                     {
@@ -190,17 +208,20 @@ namespace Ioc.Modules
         /// <summary>
         /// Adds only assemblies loaded into the app domain that have not been added already.
         /// </summary>
-        public PackageLocator ProbeAllLoadedAssemblies()
+        public PackageLocator ProbeAllLoadedAssemblies(IPropertyBag properties = null)
         {
-            return Add(AppDomain.CurrentDomain.GetAssemblies());
+            return Add(AppDomain.CurrentDomain.GetAssemblies(), properties);
         }
 
         /// <summary>
         /// Loads all assemblies in the application's bin folder and adds packages from
         /// those assemblies if they have not been added already
         /// </summary>
-        public PackageLocator ProbeBinFolderAssemblies()
+        public PackageLocator ProbeBinFolderAssemblies(IPropertyBag properties = null)
         {
+            if (properties == null)
+                properties = new PropertyBag();
+
             // Getting the location of the bin folder for all application types
             // is rediculously hard in .Net.
             // http://stackoverflow.com/questions/52797/how-do-i-get-the-path-of-the-assembly-the-code-is-in
@@ -251,14 +272,14 @@ namespace Ioc.Modules
                     })
                 .Where(a => a != null);
 
-            Add(assemblies);
+            Add(assemblies, properties);
 
             // The application entry point assembly should take priority over any
             // libraries referenced by the application.
 
             if (AppDomain.CurrentDomain.DomainManager != null &&
                 AppDomain.CurrentDomain.DomainManager.EntryAssembly != null)
-                Add(AppDomain.CurrentDomain.DomainManager.EntryAssembly);
+                Add(AppDomain.CurrentDomain.DomainManager.EntryAssembly, properties);
 
             return this;
         }

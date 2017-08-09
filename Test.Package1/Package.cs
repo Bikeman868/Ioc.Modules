@@ -16,6 +16,7 @@ namespace Test.Package1
             {
                 return new List<IocRegistration>
                 {
+                    // This package provides Class1 as an implementation of Interface1
                     new IocRegistration().Init<Interface1, Class1>()
                 };
             }

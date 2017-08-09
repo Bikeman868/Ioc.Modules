@@ -8,7 +8,7 @@
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Configures packages using Ioc.Modules as a Ninject module</description>
-    <copyright>Copyright 2016</copyright>
+    <copyright>Copyright 2017</copyright>
     <releaseNotes>Added support registering instances</releaseNotes>
     <summary>
       Provides a Ninject module that will probe assemblies for IoC dependencies 
