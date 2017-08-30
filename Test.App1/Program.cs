@@ -10,17 +10,18 @@ namespace Test.App1
     {
         static void Main(string[] args)
         {
-            // Probe assemblies to find all packages
+            // Probe assemblies in the bin folder to find all packages
+            // This will also add the program executable, and any IoC
+            // it defines will override those defined in libraries
             var packages = new PackageLocator()
-                .ProbeBinFolderAssemblies()
-                .Add(Assembly.GetExecutingAssembly());
+                .ProbeBinFolderAssemblies();
 
-            // Register IoC dependencies with Autofac and build the container
+            // Register IoC dependencies with Autofac and build the Autofac container
             var builder = new ContainerBuilder();
             Ioc.Modules.Autofac.Registrar.Register(packages, builder);
             var container = builder.Build();
 
-            // This is how Autofac does IoC
+            // Use Autofac to construct instances with their dependencies
             using (var scope = container.BeginLifetimeScope())
             {
                 // Set a break point here and step through. 

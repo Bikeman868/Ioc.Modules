@@ -11,8 +11,23 @@ namespace Test.App3
 
         void Application_Start(object sender, EventArgs e)
         {
+            var properties = new PropertyBag();
+
+            using (var webClient = new System.Net.WebClient())
+            {
+                try
+                {
+                    var ec2Identity = webClient.DownloadString("http://169.254.169.254/latest/dynamic/instance-identity/document");
+                    properties.Set(!string.IsNullOrEmpty(ec2Identity), "IsAmazonWebServices");
+                }
+                catch
+                {
+                    properties.Set(false, "IsAmazonWebServices");
+                }
+            }
+
             IocContainer = new UnityContainer();
-            var packageLocator = new PackageLocator().ProbeBinFolderAssemblies();
+            var packageLocator = new PackageLocator().ProbeBinFolderAssemblies(properties);
             Ioc.Modules.Unity.Registrar.Register(packageLocator, IocContainer);
         }
 
