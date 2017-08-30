@@ -16,7 +16,7 @@
       Ninject.
     </summary>
     <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
-    <licenseUrl>http://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html</licenseUrl>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
     <tags>IOC modular package library Ninject</tags>
     <dependencies>
       <dependency id="Ninject" version="3.2.2.0" />
