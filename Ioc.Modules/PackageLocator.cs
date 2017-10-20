@@ -72,6 +72,7 @@ namespace Ioc.Modules
                         .FirstOrDefault();
                     if (packageAttribute != null)
                     {
+                        Trace.WriteLine("  Found package " + type.FullName + " in assembly " +  assembly.GetName().Name);
                         if (packageInterface.IsAssignableFrom(type))
                         {
                             if (!_addedPackages.ContainsKey(type.FullName))
@@ -98,7 +99,7 @@ namespace Ioc.Modules
                                                   " in assembly " + assembly.FullName +
                                                   " implements IPackage but does not have a usable constructor." +
                                                   " The constructor must be public, and it should either take no" +
-                                                  " parameters, or take signature can be ";
+                                                  " parameters, or take one parameter of type IPropertyBag";
                                         Trace.WriteLine(_tracePrefix + msg);
                                         _probingErrors.Add(msg);
                                     }
