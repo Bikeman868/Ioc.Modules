@@ -113,24 +113,24 @@ property is set to `"development"`.
     [Package]
     public class Package: IPackage
     {
-        public string Name { get { return "My next great thing"; } }
+      public string Name { get { return "My next great thing"; } }
 
-		private readonly IList<IocRegistration> _iocRegistrations;
-        public IList<IocRegistration> IocRegistrations { get { return _iocRegistrations; } }
+      private readonly IList<IocRegistration> _iocRegistrations;
+      public IList<IocRegistration> IocRegistrations { get { return _iocRegistrations; } }
 
-		public Package(IPropertyBag properties)
-		{
-			_iocRegistrations = new List<IocRegistration>
-                {
-                    new IocRegistration().Init<IExceptionReporter>(IocLifetime.SingleInstance),
-                    new IocRegistration().Init<IApplication>(() => new Application(Name))
-                };
+      public Package(IPropertyBag properties)
+      {
+        _iocRegistrations = new List<IocRegistration>
+        {
+          new IocRegistration().Init<IExceptionReporter>(IocLifetime.SingleInstance),
+          new IocRegistration().Init<IApplication>(() => new Application(Name))
+        };
 
-			if (string.Equals(properties["environment"], "development", StringComparison.OrdinalIgnoreCase))
-				_iocRegistrations.Add(new IocRegistration().Init<ILog, TraceLog>(IocLifetime.SingleInstance))
-			else
-				_iocRegistrations.Add(new IocRegistration().Init<ILog, FileLog>(IocLifetime.SingleInstance))
-		}
+        if (string.Equals(properties["environment"], "development", StringComparison.OrdinalIgnoreCase))
+          _iocRegistrations.Add(new IocRegistration().Init<ILog, TraceLog>(IocLifetime.SingleInstance))
+        else
+          _iocRegistrations.Add(new IocRegistration().Init<ILog, FileLog>(IocLifetime.SingleInstance))
+      }
     }
 ```
 
