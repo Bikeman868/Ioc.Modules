@@ -8,8 +8,8 @@
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Configures packages using Ioc.Modules into a Unity container</description>
-    <copyright>Copyright 2017</copyright>
-    <releaseNotes>Added support registering instances</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <releaseNotes>Classes can have custom initialization and also have injected dependencies</releaseNotes>
     <summary>
       Probes assemblies for IoC dependencies declared with Ioc.Modules and
       registers those dependencies with the Unity container.

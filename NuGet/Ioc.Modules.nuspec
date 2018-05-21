@@ -8,8 +8,8 @@
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A modular way of configuring IOC dependencies that is independent of the container</description>
-    <copyright>Copyright 2017</copyright>
-    <releaseNotes>A property bag can be passed to packages so that they can register different IoC needs in different environments.</releaseNotes>
+    <copyright>Copyright 2018</copyright>
+    <releaseNotes>Classes can have custom initialization and also have injected dependencies</releaseNotes>
     <summary>
       Provides a mechanism for library authors to inform the hosting application
       about its IoC requirements. Applications can also use this internally to
