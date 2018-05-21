@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Ioc.Modules.Unity</id>
-    <version>1.1.3</version>
+    <version>1.3.0</version>
     <title>Ioc.Modules.Unity</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
@@ -20,7 +20,7 @@
     <dependencies>
       <dependency id="CommonServiceLocator" version="1.0" />
       <dependency id="Unity" version="2.1.505.2" />
-      <dependency id="Ioc.Modules" version="1.1.3" />
+      <dependency id="Ioc.Modules" version="1.3.0" />
     </dependencies>
     <references>
     </references>

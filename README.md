@@ -8,6 +8,35 @@ library that need to be registered with IoC. It also means that library
 developers can add new interfaces and the classes that implement them
 without breaking applications that use these libraries.
 
+## Breaking changes
+
+### Version 1.3.0
+
+In this version the signature for the function that creates instances was changed
+to support classes that have custom initialization needs but also have dependencies
+that we want to resolve via IoC.
+
+Instead of writing 
+
+```
+    new IocRegistration().Init<ICustomInterface>(() => new CustomClass().Init())
+```
+
+You must now write
+
+```
+    new IocRegistration().Init<ICustomInterface>(container => new CustomClass().Init())
+```
+
+The advantage of this change is that you can now write
+
+```
+    new IocRegistration().Init<ICustomInterface>(container => container.Resolve<CustomClass>().Init())
+```
+
+Which will use the IoC container to construct `CustomClass` passing any dependencies to
+its constructor before calling the custom initialization function.
+
 ## Package developers
 
 If you are developing a shared library and want to use IoC within it, then you need 
@@ -32,7 +61,7 @@ Here is a simple example of a `package.cs` file:
                 {
                     new IocRegistration().Init<ILog, TraceLog>(IocLifetime.SingleInstance),
                     new IocRegistration().Init<IExceptionReporter>(IocLifetime.SingleInstance),
-                    new IocRegistration().Init<IApplication>(() => new Application("My App"))
+                    new IocRegistration().Init<IApplication>(container => new Application("My App"))
                 };
             }
         }
@@ -83,8 +112,8 @@ And the Autofac version looks like this
 ```
     var packages = new PackageLocator().ProbeBinFolderAssemblies();
     var builder = new ContainerBuilder();
-    Ioc.Modules.Autofac.Registrar.Register(packages, builder);
-    var container = builder.Build();
+    var autofacBuilder = new Ioc.Modules.Autofac.Builder();
+    var container = autofacBuilder.Build(packages, builder);
 ```
 You can also add support for other IoC containers very easily. Take a look at the source code for one of
 the IoC container integrations and you will find it's less than 30 lines long.

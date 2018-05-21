@@ -387,19 +387,6 @@ namespace Ioc.Modules
                             }
                         }
                     }
-                    else
-                    {
-                        try
-                        {
-                            registration.Instance = registration.InstanceFunction();
-                        }
-                        catch (Exception ex)
-                        {
-                            message = "Exception thrown by instance function for " + registration.InterfaceType + ". " + ex.Message;
-                            log(message);
-                            reportError(message);
-                        }
-                    }
                 }
             }
 

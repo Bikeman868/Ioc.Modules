@@ -18,8 +18,8 @@ namespace Test.App1
 
             // Register IoC dependencies with Autofac and build the Autofac container
             var builder = new ContainerBuilder();
-            Ioc.Modules.Autofac.Registrar.Register(packages, builder);
-            var container = builder.Build();
+            var autofacBuilder = new Ioc.Modules.Autofac.Builder();
+            var container = autofacBuilder.Build(packages, builder);
 
             // Use Autofac to construct instances with their dependencies
             using (var scope = container.BeginLifetimeScope())

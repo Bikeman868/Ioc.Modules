@@ -39,6 +39,7 @@
     <Compile Include="..\SharedVersion.cs">
       <Link>Properties\SharedVersion.cs</Link>
     </Compile>
+    <Compile Include="IContainer.cs" />
     <Compile Include="IocLifetime.cs" />
     <Compile Include="IocRegistration.cs" />
     <Compile Include="IPackage.cs" />

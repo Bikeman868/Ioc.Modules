@@ -72,7 +72,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="App_Code\Package.cs" />
+    <Content Include="Package.cs" />
     <Compile Include="Class3.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

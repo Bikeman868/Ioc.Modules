@@ -1,8 +1,9 @@
-﻿using Ninject.Modules;
+﻿using Ninject;
+using Ninject.Modules;
 
 namespace Ioc.Modules.Ninject
 {
-    public class Module : NinjectModule
+    public class Module : NinjectModule, IContainer
     {
         private readonly PackageLocator _packageLocator;
 
@@ -19,7 +20,17 @@ namespace Ioc.Modules.Ninject
                 var bind = Bind(registration.InterfaceType);
                 if (registration.ConcreteType == null)
                 {
-                    if (registration.Instance != null)
+                    if (registration.Instance == null)
+                    {
+                        var instanceFunction = registration.InstanceFunction;
+                        if (instanceFunction != null)
+                        {
+                            bind
+                                .ToMethod(c => instanceFunction(this))
+                                .InSingletonScope();
+                        }
+                    }
+                    else
                     {
                         bind
                             .ToConstant(registration.Instance)
@@ -43,6 +54,11 @@ namespace Ioc.Modules.Ninject
                     }
                 }
             }
+        }
+
+        T IContainer.Resolve<T>()
+        {
+            return Kernel.Get<T>();
         }
     }
 }

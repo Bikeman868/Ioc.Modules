@@ -54,7 +54,7 @@ namespace Ioc.Modules
         /// <typeparam name="TInterface">The interface to register</typeparam>
         /// <param name="instanceFunction">A function that will return an instance that implements the interface</param>
         /// <returns>this for fluid configuration</returns>
-        public IocRegistration Init<TInterface>(Func<TInterface> instanceFunction)
+        public IocRegistration Init<TInterface>(Func<IContainer, TInterface> instanceFunction)
             where TInterface : class
         {
             InterfaceType = typeof(TInterface);
@@ -83,7 +83,7 @@ namespace Ioc.Modules
         /// <summary>
         /// A function that will construct and inisialize an object of Interfacetype
         /// </summary>
-        public Func<object> InstanceFunction { get; set; }
+        public Func<IContainer, object> InstanceFunction { get; set; }
 
         /// <summary>
         /// A function that will construct and inisialize an object of Interfacetype
