@@ -17,7 +17,8 @@ namespace Ioc.Modules
         private List<IPackage> _packages;
         private SortedList<string, Assembly> _probedAssemblies;
         private SortedList<string, Type> _addedPackages;
-        private List<string> _probingErrors;
+
+        public List<string> ProbingErrors { get; private set; }
 
         private const string _tracePrefix = "Package locator: ";
 
@@ -34,7 +35,7 @@ namespace Ioc.Modules
             _packages = new List<IPackage>();
             _probedAssemblies = new SortedList<string, Assembly>();
             _addedPackages = new SortedList<string, Type>();
-            _probingErrors = new List<string>();
+            ProbingErrors = new List<string>();
         }
 
         /// <summary>
@@ -101,7 +102,7 @@ namespace Ioc.Modules
                                                   " The constructor must be public, and it should either take no" +
                                                   " parameters, or take one parameter of type IPropertyBag";
                                         Trace.WriteLine(_tracePrefix + msg);
-                                        _probingErrors.Add(msg);
+                                        ProbingErrors.Add(msg);
                                     }
                                 }
                             }
@@ -112,7 +113,7 @@ namespace Ioc.Modules
                                       " in assembly " + assembly.FullName +
                                       " has the [Package] attribute but does not implement the IPackage interface.";
                             Trace.WriteLine(_tracePrefix + msg);
-                            _probingErrors.Add(msg);
+                            ProbingErrors.Add(msg);
                         }
                     }
                 }
@@ -122,7 +123,7 @@ namespace Ioc.Modules
                               + " in assembly " + assembly.FullName
                               + ". " + ex.Message;
                     Trace.WriteLine(_tracePrefix + msg);
-                    _probingErrors.Add(msg);
+                    ProbingErrors.Add(msg);
                 }
             }
             return this;
@@ -184,14 +185,14 @@ namespace Ioc.Modules
                     {
                         var msg = "Exception probiing assembly " + assembly.FullName + ". " + ex.Message;
                         Trace.WriteLine(_tracePrefix + msg);
-                        _probingErrors.Add(msg);
+                        ProbingErrors.Add(msg);
                         if (ex.LoaderExceptions != null)
                         {
                             foreach (var loaderException in ex.LoaderExceptions)
                             {
                                 var loaderMsg = "  Loader exception " + loaderException.Message;
                                 Trace.WriteLine(loaderMsg);
-                                _probingErrors.Add(loaderMsg);
+                                ProbingErrors.Add(loaderMsg);
                             }
                         }
                     }
@@ -199,7 +200,7 @@ namespace Ioc.Modules
                     {
                         var msg = "Exception probiing assembly " + assembly.FullName + ". " + ex.Message;
                         Trace.WriteLine(_tracePrefix + msg);
-                        _probingErrors.Add(msg);
+                        ProbingErrors.Add(msg);
                     }
                 }
             }
@@ -246,28 +247,28 @@ namespace Ioc.Modules
                         {
                             var msg = "File not found exception loading " + name + ". " + ex.FileName;
                             Trace.WriteLine(_tracePrefix + msg);
-                            _probingErrors.Add(msg);
+                            ProbingErrors.Add(msg);
                             return null;
                         }
                         catch (BadImageFormatException ex)
                         {
                             var msg = "Bad image format exception loading " + name + ". The DLL is probably not a .Net assembly. " + ex.FusionLog;
                             Trace.WriteLine(_tracePrefix + msg);
-                            _probingErrors.Add(msg);
+                            ProbingErrors.Add(msg);
                             return null;
                         }
                         catch (FileLoadException ex)
                         {
                             var msg = "File load exception loading " + name + ". " + ex.FusionLog;
                             Trace.WriteLine(_tracePrefix + msg);
-                            _probingErrors.Add(msg);
+                            ProbingErrors.Add(msg);
                             return null;
                         }
                         catch (Exception ex)
                         {
                             var msg = "Failed to load assembly " + name + ". " + ex.Message;
                             Trace.WriteLine(_tracePrefix + msg);
-                            _probingErrors.Add(msg);
+                            ProbingErrors.Add(msg);
                             return null;
                         }
                     })
