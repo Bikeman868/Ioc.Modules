@@ -145,7 +145,7 @@ then you should configure Ioc Modules like this:
 
 ```
     new IocRegistration().Init<IInterface1, MyClass>(),
-    new IocRegistration().Init<IInterface2>(container => (IInterface1)container.Resolve<IInterface1>()),
+    new IocRegistration().Init<IInterface2>(container => (IInterface2)container.Resolve<IInterface1>()),
 ```
 
 In this case when `IInterface1` is resolved it will resolve to a singleton instance of `MyClass`. When
