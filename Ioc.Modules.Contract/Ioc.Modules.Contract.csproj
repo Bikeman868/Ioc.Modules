@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net40;net45</TargetFrameworks>
-    <AssemblyName>Ioc.Modules</AssemblyName>
+    <TargetFrameworks>net40;net45;netstandard1.0;netstandard2.0</TargetFrameworks>
+    <AssemblyName>Ioc.Modules.Contract</AssemblyName>
     <RootNamespace>Ioc.Modules</RootNamespace>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -13,7 +13,7 @@
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/Bikeman868/Ioc.Modules</RepositoryUrl>
     <Description>A modular way of configuring IoC dependencies that is independent of the container.
-Provides a mechanism for library authors to inform the hosting application about its IoC requirements. Applications can also use this internally to make their IoC configuration more modular.
+Defines the interfaces, enumerations and attributes used by IoC.Modules
 </Description>
     <PackageReleaseNotes>Uses new MSBuid format to target multiple platforms</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -28,8 +28,5 @@ Provides a mechanism for library authors to inform the hosting application about
     <OutputPath>bin\debug</OutputPath>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Ioc.Modules.Contract\Ioc.Modules.Contract.csproj" />
-  </ItemGroup>
 
 </Project>

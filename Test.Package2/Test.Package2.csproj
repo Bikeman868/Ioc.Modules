@@ -38,9 +38,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.Net40.csproj">
-      <Project>{d18daae8-76b5-4ff5-8cae-d9204f531bf9}</Project>
-      <Name>Ioc.Modules.Net40</Name>
+    <ProjectReference Include="..\Ioc.Modules.Contract\Ioc.Modules.Contract.csproj">
+      <Project>{0147c2b0-bdf8-4e20-a531-04f1d0828628}</Project>
+      <Name>Ioc.Modules.Contract</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Interfaces\Test.Interfaces.csproj">
       <Project>{db58ff0a-7b8b-4bf9-a608-341cd00a6b89}</Project>

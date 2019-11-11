@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net40;net45</TargetFrameworks>
-    <AssemblyName>Ioc.Modules</AssemblyName>
-    <RootNamespace>Ioc.Modules</RootNamespace>
+    <AssemblyName>Ioc.Modules.Ninject</AssemblyName>
+    <RootNamespace>Ioc.Modules.Ninject</RootNamespace>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Version>1.4.0</Version>
@@ -12,8 +12,7 @@
     <PackageProjectUrl>https://github.com/Bikeman868/Ioc.Modules</PackageProjectUrl>
     <RepositoryType>GitHub</RepositoryType>
     <RepositoryUrl>https://github.com/Bikeman868/Ioc.Modules</RepositoryUrl>
-    <Description>A modular way of configuring IoC dependencies that is independent of the container.
-Provides a mechanism for library authors to inform the hosting application about its IoC requirements. Applications can also use this internally to make their IoC configuration more modular.
+    <Description>Configures packages using Ioc.Modules with the Ninject IoC container
 </Description>
     <PackageReleaseNotes>Uses new MSBuid format to target multiple platforms</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
@@ -28,8 +27,19 @@ Provides a mechanism for library authors to inform the hosting application about
     <OutputPath>bin\debug</OutputPath>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
+  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
+    <PackageReference Include="Autofac">
+      <Version>4.9.4</Version>
+    </PackageReference>
+  </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ioc.Modules.Contract\Ioc.Modules.Contract.csproj" />
+    <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Ninject" Version="3.2.2" />
   </ItemGroup>
 
 </Project>

@@ -19,6 +19,8 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <Use64BitIISExpress />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -87,13 +89,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ioc.Modules.Unity\Ioc.Modules.Net40.Unity.csproj">
-      <Project>{1b59cd46-ca3c-4ee0-8565-149b297c96d0}</Project>
-      <Name>Ioc.Modules.Net40.Unity</Name>
+    <ProjectReference Include="..\Ioc.Modules.Contract\Ioc.Modules.Contract.csproj">
+      <Project>{0147c2b0-bdf8-4e20-a531-04f1d0828628}</Project>
+      <Name>Ioc.Modules.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.Net40.csproj">
-      <Project>{d18daae8-76b5-4ff5-8cae-d9204f531bf9}</Project>
-      <Name>Ioc.Modules.Net40</Name>
+    <ProjectReference Include="..\Ioc.Modules.Unity\Ioc.Modules.Unity.csproj">
+      <Project>{a2d1f93d-e937-4439-82da-fe61842116c8}</Project>
+      <Name>Ioc.Modules.Unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.csproj">
+      <Project>{b2ef6017-d816-4a5b-8744-ac993d9dc7c6}</Project>
+      <Name>Ioc.Modules</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Interfaces\Test.Interfaces.csproj">
       <Project>{db58ff0a-7b8b-4bf9-a608-341cd00a6b89}</Project>

@@ -43,13 +43,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ioc.Modules.Ninject\Ioc.Modules.Net40.Ninject.csproj">
-      <Project>{9f885d57-3ab9-472b-ac78-d907c953e5fe}</Project>
-      <Name>Ioc.Modules.Net40.Ninject</Name>
+    <ProjectReference Include="..\Ioc.Modules.Contract\Ioc.Modules.Contract.csproj">
+      <Project>{0147c2b0-bdf8-4e20-a531-04f1d0828628}</Project>
+      <Name>Ioc.Modules.Contract</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.Net40.csproj">
-      <Project>{d18daae8-76b5-4ff5-8cae-d9204f531bf9}</Project>
-      <Name>Ioc.Modules.Net40</Name>
+    <ProjectReference Include="..\Ioc.Modules.Ninject\Ioc.Modules.Ninject.csproj">
+      <Project>{55ab88b4-d543-403f-8650-092ea7eec984}</Project>
+      <Name>Ioc.Modules.Ninject</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.csproj">
+      <Project>{b2ef6017-d816-4a5b-8744-ac993d9dc7c6}</Project>
+      <Name>Ioc.Modules</Name>
     </ProjectReference>
     <ProjectReference Include="..\Test.Interfaces\Test.Interfaces.csproj">
       <Project>{db58ff0a-7b8b-4bf9-a608-341cd00a6b89}</Project>

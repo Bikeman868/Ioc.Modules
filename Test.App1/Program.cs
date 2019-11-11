@@ -14,6 +14,7 @@ namespace Test.App1
             // This will also add the program executable, and any IoC
             // it defines will override those defined in libraries
             var packages = new PackageLocator()
+                .Add(Assembly.GetExecutingAssembly())
                 .ProbeBinFolderAssemblies();
 
             // Register IoC dependencies with Autofac and build the Autofac container
