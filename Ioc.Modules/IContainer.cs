@@ -14,7 +14,7 @@
         /// be constructed by IoC. If this in an interface type then
         /// IoC will return an instance based on the lifetime defined
         /// for this interface mapping</typeparam>
-        /// <returns></returns>
-        T Resolve<T>();
+        /// <returns>An instance of class T</returns>
+        T Resolve<T>() where T : class;
     }
 }

@@ -129,6 +129,29 @@ so that `Ioc.Modules` knows that the dependencies have been satisfied.
 
 # Advanced configuration options
 
+## One class implements multiple interfaces and is a singleton
+
+If you have
+
+```
+public interface IInterface1{}
+public interface IInterface2{}
+
+public class MyClass: IInterface1, IInterface2 {}
+```
+
+And you want only a single instance of `MyClass` to be resolved for both `IInterface1` and `IInterface2`
+then you should configure Ioc Modules like this:
+
+```
+    new IocRegistration().Init<IInterface1, MyClass>(),
+    new IocRegistration().Init<IInterface2>(container => (IInterface2)container.Resolve<IInterface1>()),
+```
+
+In this case when `IInterface1` is resolved it will resolve to a singleton instance of `MyClass`. When
+`IInterface2` is resolved the lambda function will resolve `IInterface1` then cast the instance of `MyClass`
+that is returned to `IInterface2` returning the same instance.
+
 ## Passing a property bag to package constructors
 
 This technique allows you to vary the way that packages register IoC needs based
