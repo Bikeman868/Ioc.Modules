@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Ioc.Modules</id>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <title>Ioc.Modules</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
@@ -20,10 +20,10 @@
     <tags>IOC modular package library</tags>
     <dependencies>
       <group targetFramework="net40">
-        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.1" />
       </group>
       <group targetFramework="net45">
-        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.1" />
       </group>
     </dependencies>
     <references>

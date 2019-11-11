@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Ioc.Modules.Ninject</id>
-    <version>1.4.0</version>
+    <version>1.4.1</version>
     <title>Ioc.Modules.Ninject</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
@@ -21,13 +21,13 @@
     <dependencies>
       <group targetFramework="net40">
         <dependency id="Ninject" version="3.2.2.0" />
-        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
-        <dependency id="Ioc.Modules" version="1.4.0" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.1" />
+        <dependency id="Ioc.Modules" version="1.4.1" />
       </group>
       <group targetFramework="net45">
         <dependency id="Ninject" version="3.2.2.0" />
-        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
-        <dependency id="Ioc.Modules" version="1.4.0" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.1" />
+        <dependency id="Ioc.Modules" version="1.4.1" />
       </group>
     </dependencies>
     <references>

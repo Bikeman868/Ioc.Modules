@@ -1,20 +1,16 @@
 <?xml version="1.0"?>
 <package >
   <metadata>
-    <id>Ioc.Modules</id>
-    <version>1.4.0</version>
-    <title>Ioc.Modules</title>
+    <id>Ioc.Modules.Contract</id>
+    <version>1.4.1</version>
+    <title>Ioc.Modules.Contract</title>
     <authors>Martin Halliday</authors>
     <owners>Martin Halliday</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>A modular way of configuring IOC dependencies that is independent of the container</description>
     <copyright>Copyright Martin Halliday 2014-2019</copyright>
     <releaseNotes>Converted projects in the solution to use new MSBuild format and split out .Net Standard compatible package</releaseNotes>
-    <summary>
-      Provides a mechanism for library authors to inform the hosting application
-      about its IoC requirements. Applications can also use this internally to
-      make their IoC configuration more modular.
-    </summary>
+    <summary>Defines shared interfaces, enumerations and attributes for Ioc Modules</summary>
     <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
     <license type="expression">Apache-2.0</license>
     <tags>IOC modular package library</tags>
