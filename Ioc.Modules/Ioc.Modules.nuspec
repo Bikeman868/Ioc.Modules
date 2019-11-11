@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <license type="expression">Apache-2.0</license>
+    <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Summary of changes made in this release of the package.</releaseNotes>
+    <copyright>Copyright Martin Halliday 2014-2019</copyright>
+    <tags>IOC modular package library</tags>
+    <dependencies>
+      <dependency id="Ioc.Modules.Contract" version="1.4.0" exclude="Build,Analyzers" />
+    </dependencies>
+  </metadata>
+</package>

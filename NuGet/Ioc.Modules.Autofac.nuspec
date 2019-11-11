@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Ioc.Modules.Autofac</id>
+    <version>1.4.0</version>
+    <title>Ioc.Modules.Autofac</title>
+    <authors>Martin Halliday</authors>
+    <owners>Martin Halliday</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Configures packages using Ioc.Modules with the Autofac builder</description>
+    <copyright>Copyright Martin Halliday 2014-2019</copyright>
+    <releaseNotes>Converted projects in the solution to use new MSBuild format and split out .Net Standard compatible package</releaseNotes>
+    <summary>
+      Probes assemblies for IoC dependencies declared with Ioc.Modules and
+      registers those dependencies with the Autofac builder.
+    </summary>
+    <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
+    <license type="expression">Apache-2.0</license>
+    <tags>IOC modular package library Autofac</tags>
+    <dependencies>
+      <group targetFramework="net40">
+        <dependency id="Autofac" version="3.5.2" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
+        <dependency id="Ioc.Modules" version="1.4.0" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Autofac" version="3.5.2" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
+        <dependency id="Ioc.Modules" version="1.4.0" />
+      </group>
+    </dependencies>
+    <references>
+    </references>
+  </metadata>
+  <files>
+    <file src="..\Ioc.Modules.Autofac\bin\release\net40\Ioc.Modules.Autofac.dll" target="lib\net40"/>
+    <file src="..\Ioc.Modules.Autofac\bin\release\net45\Ioc.Modules.Autofac.dll" target="lib\net45"/>
+    <file src="..\*.md" target=""/>
+  </files>
+</package>

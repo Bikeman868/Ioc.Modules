@@ -7,6 +7,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.gitattributes = .gitattributes
 		.gitignore = .gitignore
+		NuGet\Ioc.Modules.Autofac.nuspec = NuGet\Ioc.Modules.Autofac.nuspec
+		NuGet\Ioc.Modules.Contract.nuspec = NuGet\Ioc.Modules.Contract.nuspec
+		NuGet\Ioc.Modules.Ninject.nuspec = NuGet\Ioc.Modules.Ninject.nuspec
+		NuGet\Ioc.Modules.nuspec = NuGet\Ioc.Modules.nuspec
+		NuGet\Ioc.Modules.Unity.nuspec = NuGet\Ioc.Modules.Unity.nuspec
+		NuGet\Package.cmd = NuGet\Package.cmd
 		README.md = README.md
 	EndProjectSection
 EndProject
@@ -30,7 +36,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ioc.Modules.Ninject", "Ioc.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ioc.Modules.Unity", "Ioc.Modules.Unity\Ioc.Modules.Unity.csproj", "{A2D1F93D-E937-4439-82DA-FE61842116C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Contract", "Ioc.Modules.Contract\Ioc.Modules.Contract.csproj", "{0147C2B0-BDF8-4E20-A531-04F1D0828628}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ioc.Modules.Contract", "Ioc.Modules.Contract\Ioc.Modules.Contract.csproj", "{0147C2B0-BDF8-4E20-A531-04F1D0828628}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,7 +93,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {A02436CF-9148-4E20-8525-6597CACB9FEF}
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {A02436CF-9148-4E20-8525-6597CACB9FEF}
 	EndGlobalSection
 EndGlobal

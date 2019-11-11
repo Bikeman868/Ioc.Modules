@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Ioc.Modules.Ninject</id>
+    <version>1.4.0</version>
+    <title>Ioc.Modules.Ninject</title>
+    <authors>Martin Halliday</authors>
+    <owners>Martin Halliday</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Configures packages using Ioc.Modules as a Ninject module</description>
+    <copyright>Copyright Martin Halliday 2014-2019</copyright>
+    <releaseNotes>Converted projects in the solution to use new MSBuild format and split out .Net Standard compatible package</releaseNotes>
+    <summary>
+      Provides a Ninject module that will probe assemblies for IoC dependencies 
+      declared with Ioc.Modules package and registers those dependencies with 
+      Ninject.
+    </summary>
+    <projectUrl>https://github.com/Bikeman868/Ioc.Modules</projectUrl>
+    <license type="expression">Apache-2.0</license>
+    <tags>IOC modular package library Ninject</tags>
+    <dependencies>
+      <group targetFramework="net40">
+        <dependency id="Ninject" version="3.2.2.0" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
+        <dependency id="Ioc.Modules" version="1.4.0" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Ninject" version="3.2.2.0" />
+        <dependency id="Ioc.Modules.Contract" version="1.4.0" />
+        <dependency id="Ioc.Modules" version="1.4.0" />
+      </group>
+    </dependencies>
+    <references>
+    </references>
+  </metadata>
+  <files>
+    <file src="..\Ioc.Modules.Ninject\bin\release\net40\Ioc.Modules.Ninject.dll" target="lib\net40"/>
+    <file src="..\Ioc.Modules.Ninject\bin\release\net45\Ioc.Modules.Ninject.dll" target="lib\net45"/>
+    <file src="..\*.md" target=""/>
+  </files>
+</package>
