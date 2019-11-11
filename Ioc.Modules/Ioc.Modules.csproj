@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net40;net45</TargetFrameworks>
+    <AssemblyName>Ioc.Modules</AssemblyName>
+    <RootNamespace>Ioc.Modules</RootNamespace>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.3.3</Version>
+    <Authors>Martin Halliday</Authors>
+    <Copyright>Copyright © Martin Halliday 2016-2019</Copyright>
+    <PackageProjectUrl>https://github.com/Bikeman868/Ioc.Modules</PackageProjectUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <RepositoryUrl>https://github.com/Bikeman868/Ioc.Modules</RepositoryUrl>
+    <Description>A modular way of configuring IoC dependencies that is independent of the container.
+Provides a mechanism for library authors to inform the hosting application about its IoC requirements. Applications can also use this internally to make their IoC configuration more modular.
+</Description>
+    <PackageReleaseNotes>Uses new MSBuid format to target multiple platforms</PackageReleaseNotes>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <AssemblyVersion>1.3.3.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\release</OutputPath>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\debug</OutputPath>
+    <DocumentationFile></DocumentationFile>
+  </PropertyGroup>
+
+</Project>

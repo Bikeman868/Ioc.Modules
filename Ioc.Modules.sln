@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29215.179
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93F5B926-C763-48EF-9B11-1F50BE74A962}"
 	ProjectSection(SolutionItems) = preProject
@@ -15,10 +15,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 		SharedVersion.cs = SharedVersion.cs
 	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net40", "Ioc.Modules\Ioc.Modules.Net40.csproj", "{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net45", "Ioc.Modules\Ioc.Modules.Net45.csproj", "{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ioc.Modules.Net40.Ninject", "Ioc.Modules.Ninject\Ioc.Modules.Net40.Ninject.csproj", "{9F885D57-3AB9-472B-AC78-D907C953E5FE}"
 EndProject
@@ -44,20 +40,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.App2", "Test.App2\Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test.App3", "Test.App3\Test.App3.csproj", "{C59B97E3-7311-4B6F-88B3-D984C3E8DB94}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ioc.Modules", "Ioc.Modules\Ioc.Modules.csproj", "{B2EF6017-D816-4A5B-8744-AC993D9DC7C6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D18DAAE8-76B5-4FF5-8CAE-D9204F531BF9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{05BF0FCD-7808-4E03-AEAD-861CBE89DF08}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9F885D57-3AB9-472B-AC78-D907C953E5FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -106,11 +96,16 @@ Global
 		{C59B97E3-7311-4B6F-88B3-D984C3E8DB94}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C59B97E3-7311-4B6F-88B3-D984C3E8DB94}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C59B97E3-7311-4B6F-88B3-D984C3E8DB94}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2EF6017-D816-4A5B-8744-AC993D9DC7C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2EF6017-D816-4A5B-8744-AC993D9DC7C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2EF6017-D816-4A5B-8744-AC993D9DC7C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2EF6017-D816-4A5B-8744-AC993D9DC7C6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		EnterpriseLibraryConfigurationToolBinariesPath = packages\Unity.2.1.505.2\lib\NET35
+		SolutionGuid = {A02436CF-9148-4E20-8525-6597CACB9FEF}
 	EndGlobalSection
 EndGlobal
