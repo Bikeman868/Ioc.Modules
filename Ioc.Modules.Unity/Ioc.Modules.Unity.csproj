@@ -6,7 +6,7 @@
     <RootNamespace>Ioc.Modules.Unity</RootNamespace>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <Version>1.4.1</Version>
+    <Version>1.4.2</Version>
     <Authors>Martin Halliday</Authors>
     <Copyright>Copyright © Martin Halliday 2016-2019</Copyright>
     <PackageProjectUrl>https://github.com/Bikeman868/Ioc.Modules</PackageProjectUrl>
@@ -16,7 +16,7 @@
 </Description>
     <PackageReleaseNotes>Uses new MSBuid format to target multiple platforms</PackageReleaseNotes>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-    <AssemblyVersion>1.4.1.0</AssemblyVersion>
+    <AssemblyVersion>1.4.2.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -27,11 +27,6 @@
     <OutputPath>bin\debug</OutputPath>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <PackageReference Include="Autofac">
-      <Version>4.9.4</Version>
-    </PackageReference>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.csproj" />
   </ItemGroup>
@@ -39,7 +34,8 @@
     <Folder Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Unity" Version="2.1.505.2" />
+    <PackageReference Include="Unity" Version="5.11.3" />
+    <PackageReference Include="Unity.Container" Version="5.11.5" />
   </ItemGroup>
 
 </Project>

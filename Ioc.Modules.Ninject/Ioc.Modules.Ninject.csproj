@@ -27,11 +27,6 @@
     <OutputPath>bin\debug</OutputPath>
     <DocumentationFile></DocumentationFile>
   </PropertyGroup>
-  <ItemGroup Condition="'$(TargetFramework)' == 'net45'">
-    <PackageReference Include="Autofac">
-      <Version>4.9.4</Version>
-    </PackageReference>
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ioc.Modules\Ioc.Modules.csproj" />
   </ItemGroup>

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using Microsoft.Practices.Unity;
+using Unity;
+using Unity.Lifetime;
 
 namespace Ioc.Modules.Unity
 {

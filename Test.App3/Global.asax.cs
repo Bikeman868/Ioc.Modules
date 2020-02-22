@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web;
 using Ioc.Modules;
-using Microsoft.Practices.Unity;
+using Unity;
 
 namespace Test.App3
 {
